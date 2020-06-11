@@ -169,6 +169,10 @@ public class Session {
    static private final boolean ENABLE_LW = false;
 
    private boolean mIsNew;
+   
+   static public void loadMe() {
+	   
+   }
 
    /**
     * Constructs a Session
@@ -2927,11 +2931,6 @@ public class Session {
    public void deleteQCEntry(int entryIdx)
          throws SQLException {
       {
-         final PreparedStatement ps = mConnection.prepareStatement("DELETE FROM SPECTRUM WHERE QC_ENTRY.SPECTRUM=SPECTRUM.ID AND QC_ENTRY.PROJECT=?");
-         ps.setInt(1, entryIdx);
-         ps.executeUpdate();
-      }
-      {
          final PreparedStatement ps = mConnection.prepareStatement("DELETE FROM QC_ITEM WHERE ENTRY=?");
          ps.setInt(1, entryIdx);
          ps.executeUpdate();
@@ -2958,6 +2957,11 @@ public class Session {
       final int[] es = getQCProject(projIdx).getEntryIndexes();
       for(final int e : es)
          deleteQCEntry(e);
+      {
+          final PreparedStatement ps = mConnection.prepareStatement("DELETE FROM QC_DATUM WHERE PROJECT=?");
+          ps.setInt(1, projIdx);
+          ps.executeUpdate();
+      }
       {
          final PreparedStatement ps = mConnection.prepareStatement("DELETE FROM QC_PROJECT WHERE ID=?");
          ps.setInt(1, projIdx);

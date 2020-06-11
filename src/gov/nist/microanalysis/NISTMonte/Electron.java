@@ -30,7 +30,8 @@ import gov.nist.microanalysis.Utility.Math2;
  * @author Nicholas W. M. Ritchie, John Villarrubia
  * @version 1.0
  */
-final public class Electron {
+public class Electron {
+   
    // The x,y & z coordinates of the electron
    private final transient double[] mPosition;
 
@@ -264,6 +265,7 @@ final public class Electron {
       // to the z-axis, deflecting the z-axis by dTheta down from the z-axis and
       // dPhi around the z-axis, then finally rotating back to the original
       // trajectory.
+
       final double ct = Math.cos(mTheta), st = Math.sin(mTheta);
       final double cp = Math.cos(mPhi), sp = Math.sin(mPhi);
       final double ca = Math.cos(dTheta), sa = Math.sin(dTheta);
